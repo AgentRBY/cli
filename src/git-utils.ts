@@ -1,4 +1,5 @@
 import execSh from "exec-sh";
+import path from "path";
 
 export async function executeCommand(
   command: string,
@@ -27,7 +28,7 @@ export async function getIgnoredFolders(paths: string[]): Promise<string[]> {
   return stdout
     .trim()
     .split("\n")
-    .map((folder) => folder.slice(1, -1));
+    .map((folder) => path.normalize(folder).slice(1, -1));
 }
 
 export async function isGitRepo(): Promise<boolean> {
